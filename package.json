@@ -1,0 +1,9 @@
+{
+  "name": "lto",
+  "version": "0.0.1",
+  "license": "MIT",
+  "bin": "lto.js",
+  "type": "module",
+  "main": "lto.js",
+  "module": "lto.js"
+}
