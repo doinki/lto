@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 function random() {
-  return Math.ceil(Math.random() * 137) % 45 || 45;
+  return Math.floor(Math.random() * 45) + 1;
 }
 
 const set = new Set();
