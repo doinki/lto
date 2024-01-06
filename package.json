@@ -2,6 +2,54 @@
   "name": "lto",
   "version": "0.0.2",
   "license": "MIT",
+  "bin": "index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "author": {
+    "email": "doinki94@gmail.com",
+    "name": "doinki",
+    "url": "https://github.com/doinki"
+  },
+  "bugs": "https://github.com/doinki/lto/issues",
+  "files": [
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "homepage": "https://github.com/doinki/lto#readme",
+  "keywords": [
+    "lto"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doinki/lto.git"
+  },
+  "sideEffects": false,
   "type": "module",
-  "bin": "lto.js"
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "esbuild": "^0.19.11",
+    "esbuild-plugin-extension": "^0.0.2",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.3"
+  }
 }
