@@ -1,17 +1,17 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test } from 'vitest';
 
-import { MAX_NUMBER, MIN_NUMBER, create, random } from "../src";
+import { MAX_NUMBER, MIN_NUMBER, create, random } from '../src';
 
-describe("lto", () => {
-  test("MAX_NUMBER", () => {
+describe('lto', () => {
+  test('MAX_NUMBER', () => {
     expect(MAX_NUMBER).toBe(45);
   });
 
-  test("MIN_NUMBER", () => {
+  test('MIN_NUMBER', () => {
     expect(MIN_NUMBER).toBe(1);
   });
 
-  test("random", () => {
+  test('random', () => {
     for (let i = 0, length = MAX_NUMBER * 10; i < length; ++i) {
       const number = random();
 
@@ -21,17 +21,17 @@ describe("lto", () => {
     }
   });
 
-  test("create", () => {
+  test('create', () => {
     const lto = create();
 
     expect(lto.length).toBe(6);
     expect(
-      lto.every((number) => number >= MIN_NUMBER && number <= MAX_NUMBER)
+      lto.every((number) => number >= MIN_NUMBER && number <= MAX_NUMBER),
     ).toBe(true);
     expect(
       lto.every(
-        (number, index, array) => index === 0 || number > array[index - 1]
-      )
+        (number, index, array) => index === 0 || number > array[index - 1],
+      ),
     ).toBe(true);
   });
 });

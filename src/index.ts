@@ -1,1 +1,1 @@
-export * from "./lto";
+export * from './lto';

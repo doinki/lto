@@ -34,7 +34,7 @@ npx lto
 You can also integrate lto into your JavaScript projects. Here's how you can use it:
 
 ```js
-const { MAX_NUMBER, MIN_NUMBER, create, random } = require("lto");
+const { MAX_NUMBER, MIN_NUMBER, create, random } = require('lto');
 
 console.log(MAX_NUMBER, MIN_NUMBER); // 45 1
 

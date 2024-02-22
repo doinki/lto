@@ -1,8 +1,12 @@
+import { getRandomValues } from 'node:crypto';
+
 export const MAX_NUMBER = 45;
 export const MIN_NUMBER = 1;
 
 export function random(): number {
-  return Math.floor(Math.random() * MAX_NUMBER) + MIN_NUMBER;
+  const [value] = getRandomValues(new Uint32Array(1));
+
+  return (value % MAX_NUMBER) + MIN_NUMBER;
 }
 
 export type Lto = [number, number, number, number, number, number];
