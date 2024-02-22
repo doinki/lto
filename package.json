@@ -43,6 +43,7 @@
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
+    "publish": "pnpm run build && changeset publish",
     "format": "prettier --write ."
   },
   "devDependencies": {
