@@ -40,6 +40,9 @@
   },
   "sideEffects": false,
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
