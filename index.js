@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
-import { create } from './dist/lto.js';
+(async () => {
+  const command = process.argv[2]?.trim();
 
-console.log(...create());
+  if (command === 'mcp') {
+    await import('./dist/mcp.js');
+  } else {
+    const { create } = await import('./dist/index.js');
+    console.log(...create());
+  }
+})();

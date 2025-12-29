@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { MAX_NUMBER, MIN_NUMBER, create, random } from '../src';
+import { create, MAX_NUMBER, MIN_NUMBER, random } from '../src';
 
 describe('lto', () => {
   test('MAX_NUMBER', () => {
