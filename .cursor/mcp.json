@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lto": {
+      "command": "node",
+      "args": ["./dist/mcp.js"]
+    }
+  }
+}

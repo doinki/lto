@@ -59,16 +59,11 @@ server.registerTool(
     numbers.sort((a, b) => a - b);
 
     const url = new URL(
-      'https://dhlottery.co.kr/gameResult.do?method=myWinNumberList2',
+      'https://dhlottery.co.kr/lt645/checkWnNoList.do?recordCountPerPage=100',
     );
+    url.searchParams.set('myNoList', numbers.join(','));
 
-    const response = await fetch(url, {
-      body: numbers.map((number) => `txtNo_1=${number}`).join('&'),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      },
-      method: 'POST',
-    });
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(
@@ -80,28 +75,50 @@ server.registerTool(
     }
 
     const data = (await response.json()) as {
-      arr: Array<{
-        bnusNo: number;
-        drwNo: number;
-        drwNoDate: string;
-        drwtNo1: number;
-        drwtNo2: number;
-        drwtNo3: number;
-        drwtNo4: number;
-        drwtNo5: number;
-        drwtNo6: number;
-        lottoNumberGrade: string;
-        lottoNumberSu: number;
-      }>;
+      data: {
+        list: Array<{
+          bnsWnNo: string;
+          correctCnt: string;
+          /**
+           * 회차
+           */
+          ltEpsd: string;
+          /**
+           * @example '2025-12-27 20:30:00.0'
+           */
+          ltRflYmd: string;
+          /**
+           * 등수
+           * @example '1'
+           * @example 'X'
+           */
+          rank: string;
+          tm1WnNo: string;
+          tm1WnNoFlag?: 'Y';
+          tm2WnNo: string;
+          tm2WnNoFlag?: 'Y';
+          tm3WnNo: string;
+          tm3WnNoFlag?: 'Y';
+          tm4WnNo: string;
+          tm4WnNoFlag?: 'Y';
+          tm5WnNo: string;
+          tm5WnNoFlag?: 'Y';
+          tm6WnNo: string;
+          tm6WnNoFlag?: 'Y';
+        }>;
+      };
     };
 
-    const filtered = data.arr.filter((item) => item.lottoNumberGrade !== 'X');
+    const filtered = data.data.list.filter((item) => item.rank !== 'X');
 
     if (filtered.length === 0) {
       return {
         content: [
           {
-            text: '최근 1년간 당첨 기록이 없습니다.',
+            text: [
+              '*최근 1년간 당첨 기록이 없습니다.*',
+              '[최근 추첨 결과 보기](https://dhlottery.co.kr/lt645/result)',
+            ].join('\n'),
             type: 'text',
           },
         ],
@@ -116,11 +133,10 @@ server.registerTool(
             filtered
               .map((item) =>
                 [
-                  `## ${item.drwNo}회차 (${item.drwNoDate})`,
-                  `- 당첨 번호: ${item.drwtNo1}, ${item.drwtNo2}, ${item.drwtNo3}, ${item.drwtNo4}, ${item.drwtNo5}, ${item.drwtNo6}`,
-                  `- 일치한 번호 개수: ${item.lottoNumberSu}개`,
-                  `- 당첨 등수: ${item.lottoNumberGrade}등`,
-                  `- [상세 정보 보기](https://dhlottery.co.kr/gameResult.do?drwNo=${item.drwNo}&method=byWin)`,
+                  `## ${item.ltEpsd}회차 (${item.ltRflYmd.split(' ')[0]})`,
+                  `- 당첨 번호: ${item.tm1WnNo}, ${item.tm2WnNo}, ${item.tm3WnNo}, ${item.tm4WnNo}, ${item.tm5WnNo}, ${item.tm6WnNo}`,
+                  `- 일치한 번호 개수: ${item.correctCnt}개`,
+                  `- 당첨 등수: ${item.rank}등`,
                 ].join('\n'),
               )
               .join('\n\n'),
