@@ -13,7 +13,7 @@ describe('lto', () => {
 
   test('random', () => {
     for (let i = 0, length = MAX_NUMBER * 10; i < length; ++i) {
-      const number = random();
+      const number = random(MIN_NUMBER, MAX_NUMBER);
 
       expect(number).toBeGreaterThanOrEqual(MIN_NUMBER);
       expect(number).toBeLessThanOrEqual(MAX_NUMBER);
