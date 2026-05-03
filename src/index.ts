@@ -11,9 +11,8 @@ export function random(min: number, max: number): number {
   const threshold = Math.trunc(MAX_UINT32 / range) * range;
 
   let value: number;
-  do {
-    value = getRandomValues(new Uint32Array(1))[0]!;
-  } while (value >= threshold);
+  do value = getRandomValues(new Uint32Array(1))[0]!;
+  while (value >= threshold);
 
   return (value % range) + min;
 }
@@ -23,9 +22,7 @@ export type Lto = [number, number, number, number, number, number];
 export function create(): Lto {
   const set = new Set<number>();
 
-  while (set.size < 6) {
-    set.add(random(MIN_NUMBER, MAX_NUMBER));
-  }
+  while (set.size < 6) set.add(random(MIN_NUMBER, MAX_NUMBER));
 
-  return [...set].sort((a, b) => a - b) as Lto;
+  return [...set].toSorted((a, b) => a - b) as Lto;
 }

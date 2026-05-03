@@ -20,7 +20,7 @@ export default defineConfig([
     entry: ['src/mcp.ts'],
     env: { NODE_ENV: 'production' },
     format: 'esm',
-    target: 'node20',
+    target: 'node24',
     treeshake: true,
   },
 ]);

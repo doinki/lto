@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": [
+    "./oxlint/eslint.json",
+    "./oxlint/typescript.json",
+    "./oxlint/import.json",
+    "./oxlint/node.json",
+    "./oxlint/oxc.json",
+    "./oxlint/unicorn.json"
+  ],
+  "env": {
+    "builtin": true,
+    "node": true
+  },
+  "jsPlugins": ["eslint-plugin-simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
+    "typescript/no-unsafe-type-assertion": "off"
+  },
+  "options": {
+    "typeAware": true
+  }
+}

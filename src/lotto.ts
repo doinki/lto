@@ -10,16 +10,14 @@ export function registerLottoTools(server: McpServer) {
       description:
         'Generates 6 unique random numbers for a Lotto 6/45(로또6/45) ticket. The numbers are integers ranging from 1 to 45, inclusive. Returns a space-separated string of the sorted numbers.',
     },
-    () => {
-      return {
-        content: [
-          {
-            text: '로또 번호: ' + create().join(' '),
-            type: 'text',
-          },
-        ],
-      };
-    },
+    () => ({
+      content: [
+        {
+          text: `로또 번호: ${create().join(' ')}`,
+          type: 'text',
+        },
+      ],
+    }),
   );
 
   server.registerTool(
@@ -48,19 +46,14 @@ export function registerLottoTools(server: McpServer) {
     async ({ numbers }) => {
       numbers.sort((a, b) => a - b);
 
-      const url = new URL(
-        'https://dhlottery.co.kr/lt645/checkWnNoList.do?recordCountPerPage=100',
-      );
+      const url = new URL('https://dhlottery.co.kr/lt645/checkWnNoList.do?recordCountPerPage=100');
       url.searchParams.set('myNoList', numbers.join(','));
 
       const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error(
-          [
-            'Failed to fetch:',
-            [response.status, response.statusText].filter(Boolean).join(' '),
-          ].join(' '),
+          ['Failed to fetch:', [response.status, response.statusText].filter(Boolean).join(' ')].join(' '),
         );
       }
 
@@ -118,18 +111,16 @@ export function registerLottoTools(server: McpServer) {
       return {
         content: [
           {
-            text:
-              '# 최근 1년 당첨 내역\n' +
-              filtered
-                .map((item) =>
-                  [
-                    `## ${item.ltEpsd}회차 (${item.ltRflYmd.split(' ')[0]})`,
-                    `- 당첨 번호: ${item.tm1WnNo}, ${item.tm2WnNo}, ${item.tm3WnNo}, ${item.tm4WnNo}, ${item.tm5WnNo}, ${item.tm6WnNo}`,
-                    `- 일치한 번호 개수: ${item.correctCnt}개`,
-                    `- 당첨 등수: ${item.rank}등`,
-                  ].join('\n'),
-                )
-                .join('\n\n'),
+            text: `# 최근 1년 당첨 내역\n${filtered
+              .map((item) =>
+                [
+                  `## ${item.ltEpsd}회차 (${item.ltRflYmd.split(' ')[0]})`,
+                  `- 당첨 번호: ${item.tm1WnNo}, ${item.tm2WnNo}, ${item.tm3WnNo}, ${item.tm4WnNo}, ${item.tm5WnNo}, ${item.tm6WnNo}`,
+                  `- 일치한 번호 개수: ${item.correctCnt}개`,
+                  `- 당첨 등수: ${item.rank}등`,
+                ].join('\n'),
+              )
+              .join('\n\n')}`,
             type: 'text',
           },
         ],

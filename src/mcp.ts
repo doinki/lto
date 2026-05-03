@@ -30,9 +30,7 @@ let isShuttingDown = false;
 
 ['SIGINT', 'SIGTERM'].forEach((signal) => {
   process.on(signal, () => {
-    if (isShuttingDown) {
-      return;
-    }
+    if (isShuttingDown) return;
 
     isShuttingDown = true;
 

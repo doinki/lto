@@ -25,13 +25,7 @@ describe('lto', () => {
     const lto = create();
 
     expect(lto.length).toBe(6);
-    expect(
-      lto.every((number) => number >= MIN_NUMBER && number <= MAX_NUMBER),
-    ).toBe(true);
-    expect(
-      lto.every(
-        (number, index, array) => index === 0 || number > array[index - 1],
-      ),
-    ).toBe(true);
+    expect(lto.every((number) => number >= MIN_NUMBER && number <= MAX_NUMBER)).toBe(true);
+    expect(lto.every((number, index, array) => index === 0 || number > array[index - 1])).toBe(true);
   });
 });
