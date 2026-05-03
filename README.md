@@ -24,12 +24,19 @@ npx lto
 # Output: 1 4 11 14 25 43
 ```
 
+Generate pension lottery numbers directly from the command line:
+
+```bash
+npx lto pension
+# Output: 1 2 3 4 5 6
+```
+
 ### JavaScript/TypeScript
 
 Import and use lto in your JavaScript or TypeScript projects:
 
 ```js
-const { MAX_NUMBER, MIN_NUMBER, create, random } = require('lto');
+const { MAX_NUMBER, MIN_NUMBER, create, createPensionLotteryNumbers, random } = require('lto');
 
 // Constants
 console.log(MAX_NUMBER, MIN_NUMBER); // 45 1
@@ -39,6 +46,9 @@ console.log(random(MIN_NUMBER, MAX_NUMBER)); // 8
 
 // Generate 6 unique lotto numbers (sorted)
 console.log(create()); // [ 2, 4, 10, 16, 19, 30 ]
+
+// Generate 6 pension lottery digits (0-9, duplicates allowed)
+console.log(createPensionLotteryNumbers()); // [ 1, 2, 3, 4, 5, 6 ]
 ```
 
 **Available exports:**
@@ -46,6 +56,7 @@ console.log(create()); // [ 2, 4, 10, 16, 19, 30 ]
 - `MAX_NUMBER`: Maximum lotto number (45)
 - `MIN_NUMBER`: Minimum lotto number (1)
 - `create()`: Returns an array of 6 unique, sorted numbers from 1 to 45
+- `createPensionLotteryNumbers()`: Returns an array of 6 digits from 0 to 9 (duplicates allowed)
 - `random(min: number, max: number)`: Returns a single random number between `min` and `max` (inclusive)
 
 ### MCP Server (Model Context Protocol)

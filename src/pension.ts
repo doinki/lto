@@ -1,15 +1,6 @@
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 
-import { random } from './index.js';
-
-type PensionLotteryNumbers = [number, number, number, number, number, number];
-
-function createPensionLotteryNumbers(): PensionLotteryNumbers {
-  const numbers: number[] = [];
-  for (let i = 0; i < 6; i++) numbers.push(random(0, 9));
-
-  return numbers as PensionLotteryNumbers;
-}
+import { createPensionLotteryNumbers } from './index';
 
 export function registerPensionTools(server: McpServer) {
   server.registerTool(

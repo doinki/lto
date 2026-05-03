@@ -5,6 +5,9 @@
 
   if (command === 'mcp') {
     await import('./dist/mcp.js');
+  } else if (command === 'pension') {
+    const { createPensionLotteryNumbers } = await import('./dist/index.js');
+    console.log(...createPensionLotteryNumbers());
   } else {
     const { create } = await import('./dist/index.js');
     console.log(...create());

@@ -26,3 +26,12 @@ export function create(): Lto {
 
   return [...set].toSorted((a, b) => a - b) as Lto;
 }
+
+export type PensionLotteryNumbers = [number, number, number, number, number, number];
+
+export function createPensionLotteryNumbers(): PensionLotteryNumbers {
+  const numbers: number[] = [];
+  for (let i = 0; i < 6; i++) numbers.push(random(0, 9));
+
+  return numbers as PensionLotteryNumbers;
+}
