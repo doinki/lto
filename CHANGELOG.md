@@ -1,5 +1,11 @@
 # lto
 
+## 0.5.1
+
+### Patch Changes
+
+- 8b12f23: feat: random 함수에 입력값 검증 추가 및 TSDoc 문서화
+
 ## 0.5.0
 
 ### Minor Changes
